@@ -9,13 +9,15 @@ namespace Dotnet_Core_Google_Maps.Controllers {
     public class HomeController : Controller {
 
         public IActionResult Index() {
-            GoogleGeoCodeResponse mapData = GoogleMapsFetch.getMapData("https://maps.googleapis.com/maps/api/geocode/json?address=St%C3%A4mpelv%C3%A4gen");
+            GoogleGeoCodeResponse mapData = GoogleMapsFetch.getMapData("https://maps.googleapis.com/maps/api/geocode/json?address=Drottninggatan,%Stockholm%");
 
             //seperate class for validating data
             try {
-                ViewData["Message"] = mapData.results[0].geometry.location.lat;
+                ViewData["Message"] = mapData.results[0].address_components[0].long_name;
             } catch (IndexOutOfRangeException ajdå) {
                 //Log in some cool way
+                ViewData["Message"] = "Empty data.";
+
             }
 
             return View();

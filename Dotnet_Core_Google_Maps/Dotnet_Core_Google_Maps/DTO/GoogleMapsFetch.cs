@@ -15,7 +15,7 @@ namespace Dotnet_Core_Google_Maps.DAO {
 
             //TODO:: BAD URL CHECK
             string result = webClient.DownloadString(url);
-            if (result != null) {
+            if (result != null | result.Length != 0) {
                 return JsonConvert.DeserializeObject<GoogleGeoCodeResponse>(result);
             }
             return null;
