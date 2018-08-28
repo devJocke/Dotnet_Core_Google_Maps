@@ -1,13 +1,12 @@
-﻿using Dotnet_Core_Google_Maps;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dotnet_Core_Google_Maps.DTO {
-    public class Address {
-        public class GoogleGeoCodeResponse {
+    public class Map {
 
+        public class MapDetails { 
             public string status { get; set; }
             public results[] results { get; set; }
         }
