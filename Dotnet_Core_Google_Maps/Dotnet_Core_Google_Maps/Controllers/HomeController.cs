@@ -14,29 +14,19 @@ namespace Dotnet_Core_Google_Maps.Controllers {
         }
         [HttpPost]
         public IActionResult Index(string search) {
-            GoogleMapsFetch googleMapsFetch = new GoogleMapsFetch();
+            GoogleMapsFetchFactory googleMapsFetch = new GoogleMapsFetchFactory();
 
             MapFewDetails mapData = googleMapsFetch.getMapData("https://maps.googleapis.com/maps/api/geocode/json?address=" + search);
 
             try {
                 if (mapData != null) {
-                    //foreach (address_component addressComponent in mapData.results[0].address_components) {
-                    //    //ViewData["Message"] += addressComponent.types[0] + " : " + addressComponent.long_name + "<br />";
-                    //    ViewData["Message"] = "This is a test." + "<br />" + "Does it work?" ;
-                    // } 
-
-                    // seperate class for validating data
-
-                    //ViewData["Message"] = "https://maps.googleapis.com/maps/api/geocode/json?address=" + search;
                     ViewData["Lat"] = mapData.results[0].geometry.location.lat;
                     ViewData["Long"] = mapData.results[0].geometry.location.lng;
                     return View(mapData.results[0].address_components);
-
-
                 } else {
                     ViewData["Message"] = "Empty data.";
                 }
-            } catch (IndexOutOfRangeException outofrange) {
+            } catch (IndexOutOfRangeException indexOutOfRange) {
                 //Log in some cool way
                 ViewData["Message"] = "Empty data.";
 
